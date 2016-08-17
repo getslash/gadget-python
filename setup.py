@@ -11,6 +11,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = [
     'Logbook',
+    'munch',
 ]
 
 test_requirements = [
