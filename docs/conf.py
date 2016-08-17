@@ -113,6 +113,26 @@ pygments_style = 'sphinx'
 # a list of builtin themes.
 html_theme = 'default'
 
+import alabaster
+
+html_theme_path = [alabaster.get_path()]
+
+html_theme = 'alabaster'
+html_theme_options = {
+    'logo': 'gadget-logo.svg',
+    'github_user': 'getslash',
+    'github_repo': 'gadget-python',
+    'github_button': True,
+    'github_banner': True,
+    'travis_button': 'getslash/gadget-python',
+}
+html_sidebars = {
+   '**': [
+       'about.html', 'navigation.html', 'searchbox.html', 'donate.html',
+   ]
+}
+
+
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
 # documentation.

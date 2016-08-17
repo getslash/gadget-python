@@ -10,11 +10,10 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    # TODO: put package requirements here
+    'Logbook',
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
 ]
 
 setup(
@@ -24,12 +23,12 @@ setup(
     long_description=readme + '\n\n' + history,
     author="Rotem Yaari",
     author_email='vmalloc@gmail.com',
-    url='https://github.com/getslash/gadget_python',
+    url='https://github.com/getslash/gadget-python',
     packages=[
-        'gadget_python',
+        'gadget',
     ],
-    package_dir={'gadget_python':
-                 'gadget_python'},
+    package_dir={'gadget':
+                 'gadget'},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
