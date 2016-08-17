@@ -4,14 +4,14 @@
    contain the root `toctree` directive.
 
 Welcome to gadget-python's documentation!
-======================================
+=========================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   installation
+   overview
    usage
    contributing
    history
