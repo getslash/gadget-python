@@ -22,7 +22,7 @@ setup(
     version='0.1.0',
     description="Python utilities for emitting and processing Gadget log entries",
     long_description=readme + '\n\n' + history,
-    author="Rotem Yaari",
+    author="Slash Team",
     author_email='vmalloc@gmail.com',
     url='https://github.com/getslash/gadget-python',
     packages=[

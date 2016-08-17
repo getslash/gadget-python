@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'gadget-python'
-copyright = u"2016, Rotem Yaari"
+copyright = u"2016, Slash Team"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
