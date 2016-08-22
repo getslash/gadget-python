@@ -8,7 +8,6 @@ import munch
 
 __author__ = 'Rotem Yaari'
 __email__ = 'vmalloc@gmail.com'
-__version__ = '0.1.1'
 
 _MARKER = 'GDGT::'
 
@@ -38,10 +37,15 @@ class Setup(object):
 _setups = [Setup()]
 
 
-def log_operation(entity, operation_name, params):
+def log_operation(entities, operation_name, params):
     """Logs an operation done on an entity, possibly with other arguments
     """
-    p = {'name': operation_name, 'on': entity}
+    if isinstance(entities, (list, tuple)):
+        entities = list(entities)
+    else:
+        entities = [entities]
+
+    p = {'name': operation_name, 'on': entities}
     if params:
         p['params'] = params
     _log(TYPE_CODES.OPERATION, p)
@@ -91,13 +95,13 @@ def parse_log_line(line):
     line = line[index + len(_MARKER):]
     linetype, timestamp, params = line.split(':', 2)
     returned = munch.Munch(type=linetype, params=json.loads(params), timestamp=datetime.datetime.fromtimestamp(float(timestamp)))
-    if returned.type in _ALL_TYPE_CODES:
-        returned.entity = returned.params.get('on')
-
     if returned.type == TYPE_CODES.OPERATION:
+        returned.entities = returned.params.get('on')
         returned.name = returned.params.get('name')
     elif returned.type == TYPE_CODES.STATE:
+        returned.entity = returned.params.get('on')
         returned.state = returned.params.get('state')
     elif returned.type == TYPE_CODES.UPDATE:
+        returned.entity = returned.params.get('on')
         returned.update = returned.params.get('update')
     return returned

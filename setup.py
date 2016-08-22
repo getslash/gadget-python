@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import functools
+import os
 from setuptools import setup
 
 with open('README.rst') as readme_file:
@@ -8,6 +9,11 @@ with open('README.rst') as readme_file:
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
+
+_in_same_dir = functools.partial(os.path.join, os.path.dirname(__file__))
+with open(_in_same_dir("gadget", "__version__.py")) as version_file:
+    exec(version_file.read())  # pylint: disable=W0122
+
 
 requirements = [
     'Logbook',
@@ -19,7 +25,7 @@ test_requirements = [
 
 setup(
     name='gadget-python',
-    version='0.1.0',
+    version=__version__,        # pylint: disable=undefined-variable
     description="Python utilities for emitting and processing Gadget log entries",
     long_description=readme + '\n\n' + history,
     author="Slash Team",

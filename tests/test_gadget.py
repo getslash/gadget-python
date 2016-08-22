@@ -12,7 +12,7 @@ def test_operation(parser, params):
     [op] = parser.parse()
 
     assert op.type == gadget.TYPE_CODES.OPERATION
-    assert op.entity == 'someobj'
+    assert op.entities == ['someobj']
     assert op.name == 'myop'
     assert op.params['params'] == params
     assert isinstance(op.timestamp, datetime.datetime)
