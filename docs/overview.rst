@@ -10,7 +10,8 @@ Gadget operates by embedding specifically-marked log lines which can later be pa
 There are several types of events:
 
 1. **Operation**: indicates that some action happened to or on some entity. It must contain the name of the entity and the name of the operation, and may contain other arbitrary parameters
-2. **Fact**: Indicates a certain fact about the current environment. It must contain the fact name, and the fact value.
+2. **Update**: Indicates that a certain entity has been updated. It must contain the update data (but not necessarily the new state)
+3. **State**: Indicates a new state for a given entity
 
 What is ``gadget-python``?
 --------------------------

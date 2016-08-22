@@ -1,7 +1,9 @@
+import datetime
+
 import logbook
+import pytest
 
 import gadget
-import pytest
 
 
 def test_operation(parser, params):
@@ -9,10 +11,34 @@ def test_operation(parser, params):
     gadget.log_operation('someobj', 'myop', params)
     [op] = parser.parse()
 
-    assert op.type == 'OP'
+    assert op.type == gadget.TYPE_CODES.OPERATION
     assert op.entity == 'someobj'
     assert op.name == 'myop'
     assert op.params['params'] == params
+    assert isinstance(op.timestamp, datetime.datetime)
+
+
+def test_state(parser, state):
+
+    gadget.log_state('someobj', state)
+    [op] = parser.parse()
+
+    assert op.type == gadget.TYPE_CODES.STATE
+    assert op.entity == 'someobj'
+    assert op.state == state
+    assert isinstance(op.timestamp, datetime.datetime)
+
+def test_update(parser):
+
+    update = {'x': 1, 'y': 2}
+
+    gadget.log_update('someobj', update)
+    [op] = parser.parse()
+
+    assert op.type == gadget.TYPE_CODES.UPDATE
+    assert op.entity == 'someobj'
+    assert op.update == update
+    assert isinstance(op.timestamp, datetime.datetime)
 
 
 @pytest.fixture
@@ -20,16 +46,15 @@ def params():
     return {'somevalue1': 1, 'somevalue2': 'string'}
 
 
+@pytest.fixture
+def state():
+    return {'attr1': 1, 'attr2': 'string'}
+
+
 @pytest.yield_fixture
-def parser(setup):
+def parser():
     with logbook.TestHandler(level=logbook.TRACE) as h:
         yield Parser(h)
-
-
-@pytest.yield_fixture
-def setup():
-    with gadget.Setup() as s:
-        yield s
 
 
 class Parser(object):
