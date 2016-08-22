@@ -41,6 +41,12 @@ def test_update(parser):
     assert isinstance(op.timestamp, datetime.datetime)
 
 
+def test_unserializable_objects(parser):
+    gadget.log_update('someobj', {'x': 1, 'obj': object()})
+    [op] = parser.parse()
+    assert op.update['obj'].startswith('<object object at 0x')
+
+
 @pytest.fixture
 def params():
     return {'somevalue1': 1, 'somevalue2': 'string'}

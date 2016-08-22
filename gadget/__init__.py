@@ -76,7 +76,7 @@ class _LazyJSON(object):
 
     def __repr__(self):
         if self._rendered is None:
-            self._rendered = json.dumps(self._what)
+            self._rendered = json.dumps(self._what, default=repr)
         return self._rendered
 
     __str__ = __repr__
