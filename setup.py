@@ -18,7 +18,7 @@ test_requirements = [
 ]
 
 setup(
-    name='gadget_python',
+    name='gadget-python',
     version='0.1.0',
     description="Python utilities for emitting and processing Gadget log entries",
     long_description=readme + '\n\n' + history,

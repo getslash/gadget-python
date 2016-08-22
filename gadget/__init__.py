@@ -8,7 +8,7 @@ import munch
 
 __author__ = 'Rotem Yaari'
 __email__ = 'vmalloc@gmail.com'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 _MARKER = 'GDGT::'
 
