@@ -10,6 +10,16 @@ Logging Operations
 
 The code above will log that an operation called *setup* ran on an entity named *db1*, and as extra parameters would include ``{'use_transactions': True}``.
 
+.. note::
+   entities of operations can be either a single string id, a list of ids, or a dictionary mapping entitiy *roles* to entity ids:
+
+   .. code-block:: python
+
+	  >>> gadget.log_operation('copy', {'source': '/tmp/file1.txt', 'target': '/tmp/file2.txt'})
+
+.. note::
+   entity ids are completely arbitrary, and it is the user's responsibility to make sure they are indeed unique in the log.
+
 Logging Updates
 ---------------
 

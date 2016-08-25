@@ -6,7 +6,7 @@ import pytest
 import gadget
 
 
-def test_operation(parser, params):
+def test_operation(parser, params, entities):
 
     gadget.log_operation('someobj', 'myop', params)
     [op] = parser.parse()
@@ -16,6 +16,15 @@ def test_operation(parser, params):
     assert op.name == 'myop'
     assert op.params['params'] == params
     assert isinstance(op.timestamp, datetime.datetime)
+
+
+@pytest.fixture(params=[
+    'entity1',
+    ['entity1', 'entity2'],
+    {'source': 'entity1', 'target': 'entity2'},
+])
+def entities(request):
+    return request.param
 
 
 def test_state(parser, state):
