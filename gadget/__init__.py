@@ -88,8 +88,9 @@ class _LazyJSON(object):
 
 # Parsing
 def parse_log_line(line):
-    index = line.index(_MARKER)
-    if index < 0:
+    try:
+        index = line.index(_MARKER)
+    except ValueError:
         return None
 
     line = line[index + len(_MARKER):]
