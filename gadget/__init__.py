@@ -15,6 +15,7 @@ TYPE_CODES = munch.Munch(
     OPERATION='OP',
     STATE='ST',
     UPDATE='UP',
+    ERROR='ER',
 )
 
 _ALL_TYPE_CODES = set(TYPE_CODES.values())
@@ -62,6 +63,13 @@ def log_update(entity, update):
     """
     p = {'on': entity, 'update': update}
     _log(TYPE_CODES.UPDATE, p)
+
+
+def log_error(error):
+    """Logs an error
+    """
+    p = {'error': error}
+    _log(TYPE_CODES.ERROR, p)
 
 
 def _log(code, params):
