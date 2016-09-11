@@ -65,10 +65,10 @@ def log_update(entity, update):
     _log(TYPE_CODES.UPDATE, p)
 
 
-def log_error(error):
+def log_error(error, result):
     """Logs an error
     """
-    p = {'error': error}
+    p = {'error': error, 'result':result}
     _log(TYPE_CODES.ERROR, p)
 
 
@@ -113,4 +113,6 @@ def parse_log_line(line):
     elif returned.type == TYPE_CODES.UPDATE:
         returned.entity = returned.params.get('on')
         returned.update = returned.params.get('update')
+    elif returned.type == TYPE_CODES.ERROR:
+        returned.params = returned.params
     return returned
