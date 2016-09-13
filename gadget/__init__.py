@@ -38,7 +38,7 @@ class Setup(object):
 _setups = [Setup()]
 
 
-def log_operation(entities, operation_name, params):
+def log_operation(entities, operation_name, params=None):
     """Logs an operation done on an entity, possibly with other arguments
     """
     if isinstance(entities, (list, tuple)):
