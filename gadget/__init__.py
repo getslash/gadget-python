@@ -12,6 +12,7 @@ __email__ = 'vmalloc@gmail.com'
 _MARKER = 'GDGT::'
 
 TYPE_CODES = munch.Munch(
+    CREATE='CR',
     OPERATION='OP',
     STATE='ST',
     UPDATE='UP',
@@ -36,6 +37,14 @@ class Setup(object):
         assert popped is self
 
 _setups = [Setup()]
+
+def log_entity_creation(entity, params=None):
+    """Logs an entity creation
+    """
+    p = {'entity': entity}
+    if params:
+        p['params'] = params
+    _log(TYPE_CODES.CREATE, p)
 
 
 def log_operation(entities, operation_name, params=None):
@@ -113,6 +122,6 @@ def parse_log_line(line):
     elif returned.type == TYPE_CODES.UPDATE:
         returned.entity = returned.params.get('on')
         returned.update = returned.params.get('update')
-    elif returned.type == TYPE_CODES.ERROR:
-        returned.params = returned.params
+    elif returned.type == TYPE_CODES.CREATE:
+        returned.entity = returned.params.get('entity')
     return returned
