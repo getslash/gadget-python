@@ -13,6 +13,7 @@ _MARKER = 'GDGT::'
 
 TYPE_CODES = munch.Munch(
     CREATE='CR',
+    DELETE='DL',
     OPERATION='OP',
     STATE='ST',
     UPDATE='UP',
@@ -45,6 +46,15 @@ def log_entity_creation(entity, params=None):
     if params:
         p['params'] = params
     _log(TYPE_CODES.CREATE, p)
+
+
+def log_entity_deletion(entity, params=None):
+    """Logs an entity creation
+    """
+    p = {'entity': entity}
+    if params:
+        p['params'] = params
+    _log(TYPE_CODES.DELETE, p)
 
 
 def log_operation(entities, operation_name, params=None):
@@ -122,6 +132,6 @@ def parse_log_line(line):
     elif returned.type == TYPE_CODES.UPDATE:
         returned.entity = returned.params.get('on')
         returned.update = returned.params.get('update')
-    elif returned.type == TYPE_CODES.CREATE:
+    elif returned.type in [TYPE_CODES.CREATE, TYPE_CODES.DELETE]:
         returned.entity = returned.params.get('entity')
     return returned
