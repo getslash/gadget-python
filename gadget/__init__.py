@@ -22,6 +22,8 @@ TYPE_CODES = munch.Munch(
 
 _ALL_TYPE_CODES = set(TYPE_CODES.values())
 
+_logger = logbook.Logger(__name__)
+
 
 class Setup(object):
 
@@ -94,7 +96,7 @@ def log_error(error, result):
 def _log(code, params):
     if not _setups:
         return
-    logbook.log(
+    _logger.log(
         _setups[-1].level,
         '{}{}:{}:{}', _MARKER, code, time.time(), _LazyJSON(params))
 
